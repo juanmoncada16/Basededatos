@@ -1,0 +1,39 @@
+CREATE DATABASE Banco;
+USE Banco;
+CREATE TABLE Cliente(
+	Cedula int not null,
+	Nombre text(25),
+	Direccion varchar(45),
+	Telefono int,
+	Ocupacion varchar(45),
+	E_Civil varchar(45),
+	primary key (Cedula)
+);
+CREATE TABLE Cuenta(
+	IDcuenta int not null,
+	Nombre text(25),
+	Tipo varchar(45),
+	Monto int,
+	Interes decimal(3),
+	primary key (IDcuenta)
+);
+CREATE TABLE Tiene (
+	Cliente_Cedula int not null,
+	Cuenta_IDcuenta int not null,
+	FOREIGN KEY (Cliente_Cedula) REFERENCES Cliente(Cedula),
+	FOREIGN KEY (Cuenta_IDcuenta) REFERENCES Cuenta(IDcuenta)
+);
+CREATE TABLE Transaccion(
+	IDTransaccion int not null,
+	Fecha date,
+	C_origen int,
+	C_destino int,
+	Monto int,
+	primary key (IDTransaccion)
+);
+CREATE TABLE Realizan (
+	Cuenta_IDcuenta int not null,
+	Transaccion_IDTransaccion int not null,
+	FOREING KEY (Cuenta_IDcuenta) REFERENCES Cuenta(IDcuenta),
+	FOREING KEY (Trans_IDTransaccion) REFERENCES Transaccion(IDTransaccion)
+);
